@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lady Wear | Scratch & Save</title>
+<style>
+:root{--pink:#b92358;--pink2:#f8dce6;--cream:#fffaf4;--gold:#c69a42;--ink:#38232b;--muted:#775f68;--line:#efd7df}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(120deg,#fff4f7,#f9dce7);padding:26px 18px 30px;text-align:center;border-bottom:1px solid var(--line)}
+.brand{font-family:Georgia,serif;font-size:clamp(2.6rem,9vw,4.4rem);font-weight:700;color:var(--pink);line-height:1}
+.tag{letter-spacing:.19em;font-size:.72rem;margin-top:12px;color:#76505d}
+.wrap{max-width:900px;margin:auto;padding:20px 15px 44px}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;margin:15px 0;box-shadow:0 8px 24px #6b18300b}
+h2{margin:0 0 8px;font-family:Georgia,serif;color:var(--pink);font-size:1.55rem}p{line-height:1.55;margin:8px 0;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:12px;background:var(--pink);color:white;padding:13px 17px;text-decoration:none;font-weight:700;cursor:pointer;width:100%;font-size:1rem}
+.btn.secondary{background:#fff2f6;color:var(--pink);border:1px solid #edbfd0}.btn.gold{background:#8b5b17}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}.scratch{margin:15px 0;background:linear-gradient(135deg,#b51e53,#7f163b);border:4px solid #e4c06d;border-radius:18px;color:white;text-align:center;padding:26px 14px;position:relative;overflow:hidden}
+.scratch:before{content:"✦  ✧  ✦";display:block;color:#f5d88b;letter-spacing:1em;margin-bottom:10px}
+.scratch h3{font-family:Georgia,serif;font-size:1.7rem;margin:0}.prize{font-size:2.4rem;font-weight:900;color:#ffe6a2;margin:10px 0}.scratch small{color:#ffe8ef}
+.note{font-size:.83rem;background:#fff7e7;border-radius:10px;padding:11px;color:#74521b}.field{display:block;width:100%;padding:12px;border:1px solid #dfc6ce;border-radius:10px;margin:7px 0 13px;font:inherit;background:white;color:var(--ink)}label{font-size:.9rem;font-weight:700}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:130px}.hidden{display:none!important}.code{font-family:ui-monospace,monospace;font-size:1.1rem;letter-spacing:.08em;font-weight:800;background:#fff1f5;border:1px dashed var(--pink);padding:12px;border-radius:10px;text-align:center;word-break:break-word}.tabs{display:flex;gap:8px;flex-wrap:wrap}.tabs button{flex:1;min-width:130px}.tiny{font-size:.78rem}table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left;padding:10px 6px;border-bottom:1px solid var(--line)}.status{font-weight:800}.footer{text-align:center;font-size:.8rem;color:#987d86;padding:20px}
+@media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-top:30px}.card{padding:26px}}
+</style>
+</head>
+<body>
+<header><div class="brand">Lady Wear</div><div class="tag">COMFORT • STYLE • EVERYDAY YOU</div></header>
+<main class="wrap">
+  <section id="customerView">
+    <div class="card">
+      <h2>Welcome to Lady Wear 💗</h2>
+      <p>Thank you for shopping local! Share your honest experience with other customers, and enjoy our separate next-visit loyalty scratch card.</p>
+      <a id="mapsLink" class="btn" href="#" target="_blank" rel="noopener">★ Open Google Maps</a>
+      <p class="tiny">Open Google Maps first to continue. Please leave an honest review only if you wish; no particular rating is expected.</p>
+    </div>
+    <div class="card">
+      <h2>🎁 Scratch & Save</h2>
+      <p>Reveal a random 7–20% discount for your next purchase. One scratch per browser on this device; show the code at the shop. The reward is separate from Google reviews.</p>
+      <div class="scratch">
+        <h3>Your surprise discount</h3>
+        <div id="prize" class="prize">🔒 LOCKED</div>
+        <small id="scratchCaption">Open Google Maps first to unlock your card</small>
+      </div>
+      <button id="scratchBtn" class="btn" disabled>Open Google Maps to unlock</button>
+      <div id="couponArea" class="hidden">
+        <p>Your one-time coupon code:</p><div id="couponCode" class="code"></div>
+        <button id="copyBtn" class="btn secondary" style="margin-top:10px">Copy coupon code</button>
+      </div>
+      <p class="note" style="margin-top:14px">Terms: valid on your next purchase only; cannot be exchanged for cash; discount applies subject to shop rules. One play is stored in this browser. For stronger one-per-customer protection, use receipt-based codes and a shared secure database.</p>
+    </div>
+    <div class="card">
+      <h2>What you'll find here</h2>
+      <p>Everyday innerwear, nightwear, kidswear and accessories — with comfort, variety and affordable prices.</p>
+    </div>
+  </section>
+
+  <section class="card" id="adminView">
+    <h2>🔐 Shop Admin</h2>
+    <p>This is a starter demo. Set your own admin PIN before using it. Coupon records are stored only in this browser and are not shared across devices.</p>
+    <div id="adminLogin">
+      <label for="pin">Admin PIN</label><input class="field" id="pin" type="password" inputmode="numeric" placeholder="Set / enter demo PIN">
+      <button class="btn" id="loginBtn">Open admin panel</button>
+      <p class="tiny">First time? Enter a PIN and choose “Set demo PIN”. This is not secure for a live shop.</p>
+      <button class="btn secondary" id="setPinBtn" style="margin-top:8px">Set demo PIN</button>
+      <div id="loginMsg" aria-live="polite"></div>
+    </div>
+    <div id="adminPanel" class="hidden">
+      <div class="tabs">
+        <button class="btn secondary" id="refreshBtn">Refresh codes</button>
+        <button class="btn secondary" id="exportBtn">Export CSV</button>
+        <button class="btn secondary" id="logoutBtn">Lock panel</button>
+      </div>
+      <h2 style="margin-top:22px">Redeem a coupon</h2>
+      <label for="redeemCode">Customer code</label><input class="field" id="redeemCode" placeholder="e.g. LW-AB12CD">
+      <button class="btn gold" id="redeemBtn">Verify & redeem</button>
+      <div id="redeemMsg" aria-live="polite"></div>
+      <h2 style="margin-top:24px">Coupon register</h2>
+      <div style="overflow-x:auto"><table><thead><tr><th>Code</th><th>Discount</th><th>Status</th><th>Created</th></tr></thead><tbody id="couponRows"><tr><td colspan="4">No coupons yet.</td></tr></tbody></table></div>
+      <button class="btn secondary" id="clearBtn" style="margin-top:14px">Clear demo coupon records</button>
+    </div>
+  </section>
+  <div class="footer">Lady Wear • Because your comfort matters</div>
+</main>
+<script>
+/* SETUP: replace this placeholder with your shop's Google Maps review URL. */
+const GOOGLE_MAPS_REVIEW_URL = "https://maps.app.goo.gl/7s25z25tysHtX1yD6";
+document.getElementById("mapsLink").href = GOOGLE_MAPS_REVIEW_URL.startsWith("http") ? GOOGLE_MAPS_REVIEW_URL : "https://www.google.com/maps";
+document.getElementById("mapsLink").addEventListener("click",()=>{
+  localStorage.setItem(UNLOCKKEY,"yes");
+  $("scratchBtn").disabled=false;
+  $("scratchBtn").textContent="Scratch to reveal discount";
+  $("prize").textContent="🎁 READY";
+  $("scratchCaption").textContent="Card unlocked — tap below to reveal your coupon";
+});
+const KEY="ladywear_demo_coupons_v1", PINKEY="ladywear_demo_pin_v1";
+let currentCoupon=null;
+const PLAYKEY="ladywear_demo_played_v1";
+const UNLOCKKEY="ladywear_demo_maps_opened_v1";
+const $=id=>document.getElementById(id);
+const readCoupons=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch{return []}};
+const writeCoupons=a=>localStorage.setItem(KEY,JSON.stringify(a));
+function weightedDiscount(){
+  // 7–10% are common (92% combined); 11–20% are rare (8% combined).
+  const r=Math.random()*100;
+  if(r<28)return 7;
+  if(r<52)return 8;
+  if(r<74)return 9;
+  if(r<92)return 10;
+  if(r<94)return 11;
+  if(r<95.5)return 12;
+  if(r<96.7)return 13;
+  if(r<97.6)return 14;
+  if(r<98.3)return 15;
+  if(r<98.8)return 16;
+  if(r<99.2)return 17;
+  if(r<99.5)return 18;
+  if(r<99.75)return 19;
+  return 20
+}
+function makeCode(){const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<6;i++)s+=chars[Math.floor(Math.random()*chars.length)];return "LW-"+s}
+function showCoupon(c){
+  currentCoupon=c;
+  $("prize").textContent=c.discount+"% OFF";
+  $("scratchCaption").textContent="Your reward is saved. Keep this code for your next visit.";
+  $("couponCode").textContent=c.code;
+  $("couponArea").classList.remove("hidden");
+  $("scratchBtn").disabled=true;
+  $("scratchBtn").textContent="Discount already revealed";
+}
+const savedPlay=localStorage.getItem(PLAYKEY);
+if(savedPlay){
+  try{const saved=JSON.parse(savedPlay);if(saved && saved.code){showCoupon(saved);}}
+  catch{}
+}else if(localStorage.getItem(UNLOCKKEY)==="yes"){
+  $("scratchBtn").disabled=false;
+  $("scratchBtn").textContent="Scratch to reveal discount";
+  $("prize").textContent="🎁 READY";
+  $("scratchCaption").textContent="Card unlocked — tap below to reveal your coupon";
+}
+$("scratchBtn").addEventListener("click",()=>{
+  if(!localStorage.getItem(UNLOCKKEY)){ $("scratchCaption").textContent="Open Google Maps first to unlock the card.";return}
+  if(currentCoupon || localStorage.getItem(PLAYKEY)){ $("scratchCaption").textContent="One scratch card has already been used in this browser.";return}
+  const d=weightedDiscount();let code=makeCode(), coupons=readCoupons();while(coupons.some(c=>c.code===code))code=makeCode();
+  currentCoupon={code,discount:d,status:"Unused",created:new Date().toISOString()};
+  coupons.push(currentCoupon);writeCoupons(coupons);localStorage.setItem(PLAYKEY,JSON.stringify(currentCoupon));
+  $("prize").textContent=d+"% OFF";$("scratchCaption").textContent="Congratulations! Save this code for your next visit.";
+  $("couponCode").textContent=code;$("couponArea").classList.remove("hidden");$("scratchBtn").disabled=true;$("scratchBtn").textContent="Discount revealed";renderCoupons();
+});
+$("copyBtn").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("couponCode").textContent);$("copyBtn").textContent="Copied!";}catch{$("copyBtn").textContent="Please copy the code manually";}});
+$("setPinBtn").addEventListener("click",()=>{const p=$("pin").value.trim();if(p.length<4){$("loginMsg").textContent="Please choose a PIN of at least 4 characters.";return}localStorage.setItem(PINKEY,p);$("loginMsg").textContent="Demo PIN saved in this browser. Now open the panel.";});
+$("loginBtn").addEventListener("click",()=>{const saved=localStorage.getItem(PINKEY);if(!saved){$("loginMsg").textContent="Set a demo PIN first.";return}if($("pin").value!==saved){$("loginMsg").textContent="Incorrect PIN.";return}$("adminLogin").classList.add("hidden");$("adminPanel").classList.remove("hidden");renderCoupons();});
+$("logoutBtn").addEventListener("click",()=>{$("adminPanel").classList.add("hidden");$("adminLogin").classList.remove("hidden");$("pin").value="";});
+function renderCoupons(){const list=readCoupons().slice().reverse();$("couponRows").innerHTML=list.length?list.map(c=>`<tr><td>${escapeHtml(c.code)}</td><td>${c.discount}%</td><td class="status">${c.status==="Used"?"Used":"Unused"}</td><td>${new Date(c.created).toLocaleDateString()}</td></tr>`).join(""):'<tr><td colspan="4">No coupons yet.</td></tr>'}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+$("refreshBtn").addEventListener("click",renderCoupons);
+$("redeemBtn").addEventListener("click",()=>{const code=$("redeemCode").value.trim().toUpperCase(),list=readCoupons(),c=list.find(x=>x.code===code);if(!c){$("redeemMsg").textContent="Code not found.";return}if(c.status==="Used"){$("redeemMsg").textContent="Already redeemed. Do not apply again.";return}c.status="Used";c.usedAt=new Date().toISOString();writeCoupons(list);$("redeemMsg").textContent=`Valid: ${c.discount}% off. Marked as redeemed.`;renderCoupons();});
+$("exportBtn").addEventListener("click",()=>{const rows=[["code","discount_percent","status","created_at","used_at"],...readCoupons().map(c=>[c.code,c.discount,c.status,c.created,c.usedAt||""])];const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");const blob=new Blob([csv],{type:"text/csv"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="lady-wear-coupons.csv";a.click();URL.revokeObjectURL(url);});
+$("clearBtn").addEventListener("click",()=>{if(confirm("Delete all demo coupon records from this browser?")){localStorage.removeItem(KEY);renderCoupons();$("redeemMsg").textContent="Demo records cleared.";}});renderCoupons();
+</script>
+</body>
+</html>
